@@ -2,6 +2,7 @@ import { onSnake, expandSnake } from "./snake.js";
 import { randomGridPosition } from "./grid.js";
 
 let food = getRandomFoodPosition();
+let foodEaten = 0;
 let score = 0;
 const EXPANSION_RATE = 2;
 const scoreSpan = document.getElementById("score");
@@ -12,7 +13,12 @@ highScoreSpan.innerHTML = highScore;
 
 export function update() {
   if (onSnake(food)) {
-    score += 5;
+    foodEaten++;
+    if (foodEaten % 10 === 0) {
+      score += 20;
+    } else {
+      score += 5;
+    }
     scoreSpan.innerHTML = score;
     expandSnake(EXPANSION_RATE);
     food = getRandomFoodPosition();
